@@ -16,11 +16,14 @@ import remi.gui as gui
 from remi import start, App
 from threading import Timer
 import os
-ON_HEROKU = os.environ.get('ON_HEROKU')
-porta = 3000
-if ON_HEROKU:
-    # get the heroku port
-    porta = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
+
+porta = 17995
+try:
+    ON_HEROKU = os.environ.get('ON_HEROKU')
+    if ON_HEROKU:
+        porta = int(os.environ.get('PORT', 17995))  # as per OP comments default is 17995
+except:
+    pass
 
 class MyApp(App):
     def __init__(self, *args):
@@ -330,5 +333,5 @@ if __name__ == "__main__":
     # starts the webserver
     # optional parameters
     # start(MyApp,address='127.0.0.1', port=8081, multiple_instance=False,enable_file_cache=True, update_interval=0.1, start_browser=True)
-    import ssl
-    start(MyApp, debug=True, address='0.0.0.0', port=porta, start_browser=True, multiple_instance=True)
+    print(">>>>>>>port: %s"%porta)
+    start(MyApp, debug=True, address='0.0.0.0', port=porta, start_browser=False, multiple_instance=False)
