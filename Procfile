@@ -1,1 +1,1 @@
-python ./widgets_overview_app.py
+web: python ./widgets_overview_app.py
